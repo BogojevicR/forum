@@ -11,4 +11,8 @@ class ForumApplication
 
 fun main(args: Array<String>) {
 	runApplication<ForumApplication>(*args)
+
+	var mod = Moderator("test", "test", "test", LocalDateTime.now())
+	var topic = Topic("title", "description", LocalDateTime.now())
+
 }
