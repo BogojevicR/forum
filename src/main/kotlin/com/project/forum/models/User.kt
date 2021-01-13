@@ -1,5 +1,6 @@
 package com.project.forum.models
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -11,6 +12,13 @@ open class User(
     open var password: String,
     open var createdAt: LocalDateTime,
     open var status: UserStatus = UserStatus.NEEDS_CONFIRMATION,
+
+    @OneToMany(mappedBy = "owner", cascade = [CascadeType.ALL])
+    @JsonManagedReference
+    open var posts: List<Post> = arrayListOf(),
+    @OneToMany(mappedBy = "owner", cascade = [CascadeType.ALL])
+    @JsonManagedReference
+    open var comments: List<Comment> = arrayListOf(),
     @Id @GeneratedValue(strategy = GenerationType.AUTO) open val id: Long = 0
 ) {
 

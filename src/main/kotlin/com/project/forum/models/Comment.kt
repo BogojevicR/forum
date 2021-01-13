@@ -1,13 +1,22 @@
 package com.project.forum.models
 
-import org.springframework.data.annotation.Id
+import com.fasterxml.jackson.annotation.JsonBackReference
 import java.time.LocalDateTime
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
+import javax.persistence.*
 
+@Entity
 class Comment (
-    var comment: String,
+    var text: String,
     var created: LocalDateTime,
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long = 0
+    var likes: Int,
+    @ManyToOne()
+    @JoinColumn(name = "post_id")
+    @JsonBackReference
+    var post: Post,
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
+    var owner: User,
+    @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0
 ){
 }

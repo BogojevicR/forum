@@ -1,7 +1,10 @@
 package com.project.forum.models
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.time.LocalDateTime
+import javax.persistence.CascadeType
 import javax.persistence.Entity
+import javax.persistence.OneToMany
 import javax.persistence.Table
 
 @Entity
@@ -11,7 +14,8 @@ class Admin(
     email: String,
     password: String,
     createdAt: LocalDateTime,
-    status: UserStatus = UserStatus.NEEDS_CONFIRMATION,
-    id: Long = 0
+    @OneToMany(mappedBy = "admin", cascade = [CascadeType.ALL])
+    @JsonManagedReference
+    var topics: List<Topic> = arrayListOf(),
 ) : User(username, email, password, createdAt) {
 }
