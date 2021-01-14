@@ -12,7 +12,7 @@ class Moderator(
     password: String, createdAt: LocalDateTime,
     status: UserStatus = UserStatus.NEEDS_CONFIRMATION,
     @ManyToMany(mappedBy = "moderators")
-    @JsonBackReference
+    @JsonBackReference("moderator-topics")
     var topics: List<Topic> = arrayListOf()
 ) : User(username, email, password, createdAt, status) {
 }

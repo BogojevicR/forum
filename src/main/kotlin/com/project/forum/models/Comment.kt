@@ -11,11 +11,11 @@ class Comment (
     var likes: Int,
     @ManyToOne()
     @JoinColumn(name = "post_id")
-    @JsonBackReference
+    @JsonBackReference("post-comments")
     var post: Post,
     @ManyToOne()
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JsonBackReference("user-comments")
     var owner: User,
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0
 ){

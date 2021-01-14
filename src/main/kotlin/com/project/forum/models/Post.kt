@@ -13,14 +13,14 @@ class Post (
     var created: LocalDateTime,
     @ManyToOne()
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JsonBackReference("user-posts")
     var owner: User,
     @ManyToOne()
     @JoinColumn(name = "topic_id")
-    @JsonBackReference
+    @JsonBackReference("topic-post")
     var topic: Topic,
     @OneToMany(mappedBy = "post", cascade = [CascadeType.ALL])
-    @JsonManagedReference
+    @JsonManagedReference("post-comments")
     var comments: List<Comment> = arrayListOf(),
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long = 0
 ){

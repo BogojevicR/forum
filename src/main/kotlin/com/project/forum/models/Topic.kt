@@ -13,7 +13,7 @@ class Topic (
     var created: LocalDateTime,
     @ManyToOne()
     @JoinColumn(name = "admin_id")
-    @JsonBackReference
+    @JsonBackReference("admin-topics")
     var admin: Admin,
     @ManyToMany()
     @JoinTable(
@@ -23,7 +23,7 @@ class Topic (
     )
     var moderators: List<Moderator> = arrayListOf(),
     @OneToMany(mappedBy = "topic", cascade = [CascadeType.ALL])
-    @JsonManagedReference
+    @JsonManagedReference("topic-post")
     var posts: List<Post> = arrayListOf(),
     @Id @GeneratedValue(strategy = GenerationType.AUTO) var id: Long = 0
 ){

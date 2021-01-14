@@ -15,7 +15,7 @@ class Admin(
     password: String,
     createdAt: LocalDateTime,
     @OneToMany(mappedBy = "admin", cascade = [CascadeType.ALL])
-    @JsonManagedReference
+    @JsonManagedReference("admin-topics")
     var topics: List<Topic> = arrayListOf(),
 ) : User(username, email, password, createdAt) {
 }
