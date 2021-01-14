@@ -9,7 +9,8 @@ import javax.persistence.*
 class Moderator(
     username: String,
     email: String,
-    password: String, createdAt: LocalDateTime,
+    password: String,
+    createdAt: LocalDateTime = LocalDateTime.now(),
     status: UserStatus = UserStatus.NEEDS_CONFIRMATION,
     @ManyToMany(mappedBy = "moderators")
     @JsonBackReference("moderator-topics")

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/auth")
-class AuthController(val userService: AuthService) {
+class AuthController(var userService: AuthService) {
 
     @PostMapping(value = ["/signup"])
     fun registerUser(@RequestBody user: User): ResponseEntity<*> {
@@ -17,15 +17,5 @@ class AuthController(val userService: AuthService) {
     @PutMapping(value = ["/confirm{email}"])
     fun confirmUser(@RequestParam email: String): ResponseEntity<*> {
         return userService.confirmUser(email)
-    }
-
-    @PutMapping(value = ["/ban{email}"])
-    fun banUser(@RequestParam email: String): ResponseEntity<*> {
-        return userService.banUser(email)
-    }
-
-    @PutMapping(value = ["/removeBan{email}"])
-    fun removeBan(@RequestParam email: String): ResponseEntity<*> {
-        return userService.removeBan(email)
     }
 }

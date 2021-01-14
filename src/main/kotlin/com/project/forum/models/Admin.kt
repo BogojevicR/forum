@@ -13,7 +13,7 @@ class Admin(
     username: String,
     email: String,
     password: String,
-    createdAt: LocalDateTime,
+    createdAt: LocalDateTime = LocalDateTime.now(),
     @OneToMany(mappedBy = "admin", cascade = [CascadeType.ALL])
     @JsonManagedReference("admin-topics")
     var topics: List<Topic> = arrayListOf(),

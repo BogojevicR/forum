@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 
 @Service
-class AuthService(val userRepository: UserRepository) {
+class AuthService(var userRepository: UserRepository) {
 
     fun registerUser(username: String, email: String, password: String): ResponseEntity<*>{
         if(userRepository.findByEmail(email) != null){
@@ -27,26 +27,6 @@ class AuthService(val userRepository: UserRepository) {
         }
         user.status = UserStatus.ACTIVE;
         user = userRepository.save(user)
-        return ResponseEntity.badRequest().body(user)
-    }
-
-    fun banUser(email: String): ResponseEntity<*> {
-        var user = userRepository.findByEmail(email)
-        if (user == null) {
-            return ResponseEntity.badRequest().body("User with email doesn't exists.")
-        }
-        user.status = UserStatus.BANNED
-        user = userRepository.save(user)
-        return ResponseEntity.badRequest().body(user)
-    }
-
-    fun removeBan(email: String): ResponseEntity<*> {
-        var user = userRepository.findByEmail(email)
-        if (user == null) {
-            return ResponseEntity.badRequest().body("User with email doesn't exists.")
-        }
-        user.status = UserStatus.ACTIVE
-        user = userRepository.save(user)
-        return ResponseEntity.badRequest().body(user)
+        return ResponseEntity.ok().body(user)
     }
 }
