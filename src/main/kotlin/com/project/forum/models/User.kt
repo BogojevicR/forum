@@ -1,5 +1,6 @@
 package com.project.forum.models
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import java.time.LocalDateTime
@@ -14,6 +15,7 @@ open class User(
     @Column(unique = true)
     open var email: String,
     open var password: String,
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     open var createdAt: LocalDateTime = LocalDateTime.now(),
     open var status: UserStatus = UserStatus.NEEDS_CONFIRMATION,
 
